@@ -360,6 +360,46 @@ button, input, select {
   flex-shrink: 0;
 }
 
+.logo-avatar-wrap {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+}
+
+.brand-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2.5px solid var(--primary-color);
+  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.25);
+  display: block;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.brand-logo:hover .brand-avatar-img {
+  transform: scale(1.06);
+  box-shadow: 0 6px 16px rgba(5, 150, 105, 0.35);
+}
+
+.logo-verified-badge {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 18px;
+  height: 18px;
+  background: var(--primary-color);
+  color: #FFFFFF;
+  border: 2px solid #FFFFFF;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
 .logo-icon {
   width: 44px;
   height: 44px;
@@ -507,6 +547,21 @@ button, input, select {
   padding-bottom: 18px;
   border-bottom: 1px solid var(--border-color);
   margin-bottom: 20px;
+}
+
+.drawer-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.drawer-avatar-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--primary-color);
+  box-shadow: 0 2px 8px rgba(5, 150, 105, 0.2);
 }
 
 .drawer-close {
@@ -2574,12 +2629,21 @@ button, input, select {
 .footer-logo {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   font-family: var(--font-heading);
   font-size: 1.4rem;
   font-weight: 800;
   color: #FFFFFF;
   margin-bottom: 14px;
+}
+
+.footer-avatar-img {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--primary-light);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 .footer-logo i {
@@ -2794,6 +2858,19 @@ button, input, select {
   .header-actions .btn-phone,
   .header-actions .header-wa-btn {
     display: none;
+  }
+
+  .logo-avatar-wrap {
+    width: 42px;
+    height: 42px;
+  }
+
+  .logo-verified-badge {
+    width: 16px;
+    height: 16px;
+    font-size: 0.55rem;
+    bottom: -1px;
+    right: -1px;
   }
 
   .brand-logo .logo-icon {
