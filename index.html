@@ -2001,6 +2001,115 @@
     </a>
   </div>
 
+  <!-- FLOATING SECTION INDEX NAVIGATOR (AUTO-SWITCHING SCROLL SPY) -->
+  <aside class="floating-index-nav" id="floatingIndexNav" aria-label="Page Sections Index">
+    <!-- Hovering Pill Indicator -->
+    <button class="index-pill-btn" id="indexPillBtn" aria-expanded="false" aria-label="Toggle Page Index">
+      <div class="index-pill-counter">
+        <span class="current-num" id="currentIndexNum">01</span>
+        <span class="slash">/</span>
+        <span class="total-num" id="totalIndexNum">09</span>
+      </div>
+      <div class="index-pill-divider"></div>
+      <span class="index-pill-label" id="currentIndexLabel">Home</span>
+      <span class="index-pill-arrow"><i class="fa-solid fa-chevron-left"></i></span>
+      <div class="index-pill-progress-ring">
+        <svg viewBox="0 0 36 36">
+          <path class="ring-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+          <path class="ring-fill" id="indexProgressFill" stroke-dasharray="11, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+        </svg>
+      </div>
+    </button>
+
+    <!-- Expanded Full Index Menu Card -->
+    <div class="index-card-menu" id="indexCardMenu">
+      <div class="index-card-header">
+        <div class="index-card-title">
+          <i class="fa-solid fa-compass"></i>
+          <span>Page Index</span>
+        </div>
+        <span class="index-card-count" id="indexCardCounter">Section 01 of 09</span>
+        <button class="index-card-close" id="indexCardClose" aria-label="Close Index Menu">&times;</button>
+      </div>
+
+      <div class="index-progress-bar-wrap">
+        <div class="index-progress-bar" id="indexProgressBar" style="width: 11%;"></div>
+      </div>
+
+      <ul class="index-items-list" id="indexItemsList">
+        <li class="index-nav-item active" data-target="hero" data-index="01" data-label="Home">
+          <a href="#hero" class="index-nav-link">
+            <span class="item-num">01</span>
+            <span class="item-dot"></span>
+            <span class="item-name">Home & Vitality</span>
+          </a>
+        </li>
+        <li class="index-nav-item" data-target="live-results" data-index="02" data-label="Live Proof">
+          <a href="#live-results" class="index-nav-link">
+            <span class="item-num">02</span>
+            <span class="item-dot"></span>
+            <span class="item-name">Live Transformations</span>
+          </a>
+        </li>
+        <li class="index-nav-item" data-target="btc-marathon" data-index="03" data-label="BTC Marathon">
+          <a href="#btc-marathon" class="index-nav-link">
+            <span class="item-num">03</span>
+            <span class="item-dot"></span>
+            <span class="item-name">BTC Weight Loss Marathon</span>
+          </a>
+        </li>
+        <li class="index-nav-item" data-target="assessment" data-index="04" data-label="BMI Calculator">
+          <a href="#assessment" class="index-nav-link">
+            <span class="item-num">04</span>
+            <span class="item-dot"></span>
+            <span class="item-name">Free 60-Sec BMI Assessment</span>
+          </a>
+        </li>
+        <li class="index-nav-item" data-target="services" data-index="05" data-label="Wellness Solutions">
+          <a href="#services" class="index-nav-link">
+            <span class="item-num">05</span>
+            <span class="item-dot"></span>
+            <span class="item-name">Personalized Nutrition Plans</span>
+          </a>
+        </li>
+        <li class="index-nav-item" data-target="transformations" data-index="06" data-label="5,000+ Stories">
+          <a href="#transformations" class="index-nav-link">
+            <span class="item-num">06</span>
+            <span class="item-dot"></span>
+            <span class="item-name">5,000+ Client Proof</span>
+          </a>
+        </li>
+        <li class="index-nav-item" data-target="about" data-index="07" data-label="Coach Ritu">
+          <a href="#about" class="index-nav-link">
+            <span class="item-num">07</span>
+            <span class="item-dot"></span>
+            <span class="item-name">About Coach Ritu Oberoi</span>
+          </a>
+        </li>
+        <li class="index-nav-item" data-target="faq" data-index="08" data-label="FAQs">
+          <a href="#faq" class="index-nav-link">
+            <span class="item-num">08</span>
+            <span class="item-dot"></span>
+            <span class="item-name">Frequently Asked Questions</span>
+          </a>
+        </li>
+        <li class="index-nav-item" data-target="contact" data-index="09" data-label="Visit Club">
+          <a href="#contact" class="index-nav-link">
+            <span class="item-num">09</span>
+            <span class="item-dot"></span>
+            <span class="item-name">Vikaspuri Club & Map</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="index-card-footer">
+        <a href="#assessment" class="index-quick-calc-btn">
+          <i class="fa-solid fa-calculator"></i> Quick BMI Test
+        </a>
+      </div>
+    </div>
+  </aside>
+
   <!-- SITE FOOTER -->
   <footer class="site-footer">
     <div class="container footer-grid">

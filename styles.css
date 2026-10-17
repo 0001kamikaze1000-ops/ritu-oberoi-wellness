@@ -3705,3 +3705,386 @@ button, input, select {
     font-size: 0.82rem;
   }
 }
+
+/* ==========================================================================
+   FLOATING SECTION INDEX NAVIGATOR (AUTO-SWITCHING SCROLL SPY)
+   ========================================================================== */
+.floating-index-nav {
+  position: fixed;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 950;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+/* Floating Pill Button */
+.index-pill-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(15, 23, 42, 0.90);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
+  padding: 8px 14px 8px 16px;
+  border-radius: 999px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28), 0 2px 8px rgba(5, 150, 105, 0.25);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+}
+
+.index-pill-btn:hover {
+  background: rgba(15, 23, 42, 0.98);
+  border-color: rgba(16, 185, 129, 0.45);
+  transform: translateX(-4px) scale(1.02);
+  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.35), 0 0 16px rgba(16, 185, 129, 0.35);
+}
+
+.index-pill-counter {
+  display: flex;
+  align-items: baseline;
+  gap: 3px;
+  font-family: var(--font-heading);
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.index-pill-counter .current-num {
+  color: #34D399; /* Vibrant Emerald */
+  font-size: 1.05rem;
+  font-weight: 800;
+  display: inline-block;
+  min-width: 18px;
+  text-align: center;
+}
+
+.index-pill-counter .slash {
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 0.82rem;
+}
+
+.index-pill-counter .total-num {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.82rem;
+}
+
+.index-pill-divider {
+  width: 1px;
+  height: 16px;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.index-pill-label {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #F8FAFC;
+  max-width: 130px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: 0.2px;
+  transition: color 0.2s ease;
+}
+
+.index-pill-arrow {
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.5);
+  transition: transform 0.3s ease;
+}
+
+.floating-index-nav.expanded .index-pill-arrow {
+  transform: rotate(180deg);
+}
+
+.index-pill-progress-ring {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.index-pill-progress-ring svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.index-pill-progress-ring .ring-bg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.15);
+  stroke-width: 3.5;
+}
+
+.index-pill-progress-ring .ring-fill {
+  fill: none;
+  stroke: #10B981;
+  stroke-width: 3.8;
+  stroke-linecap: round;
+  transition: stroke-dasharray 0.4s ease;
+}
+
+/* Expanded Full Index Menu Card */
+.index-card-menu {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%) translateX(20px);
+  width: 300px;
+  max-height: 85vh;
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  padding: 18px;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45), 0 0 20px rgba(5, 150, 105, 0.2);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: all 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.floating-index-nav.expanded .index-card-menu,
+.floating-index-nav:hover .index-card-menu {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(-50%) translateX(0);
+}
+
+.index-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 12px;
+}
+
+.index-card-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.index-card-title i {
+  color: var(--primary-light);
+  font-size: 0.9rem;
+}
+
+.index-card-count {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #34D399;
+  background: rgba(16, 185, 129, 0.15);
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.index-card-close {
+  display: none;
+  background: none;
+  border: none;
+  color: #94A3B8;
+  font-size: 1.4rem;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0 4px;
+}
+
+.index-progress-bar-wrap {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+
+.index-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #10B981, #F59E0B);
+  border-radius: 4px;
+  transition: width 0.35s ease;
+}
+
+.index-items-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  overflow-y: auto;
+  max-height: 52vh;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+.index-nav-item {
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+.index-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 7px 10px;
+  border-radius: 10px;
+  color: #94A3B8;
+  font-size: 0.82rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.index-nav-link:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #FFFFFF;
+  transform: translateX(3px);
+}
+
+.index-nav-item.active .index-nav-link {
+  background: rgba(16, 185, 129, 0.18);
+  color: #FFFFFF;
+  font-weight: 700;
+  border: 1px solid rgba(16, 185, 129, 0.35);
+}
+
+.item-num {
+  font-family: var(--font-heading);
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.4);
+  width: 18px;
+}
+
+.index-nav-item.active .item-num {
+  color: #34D399;
+}
+
+.item-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.index-nav-item.active .item-dot {
+  background: #34D399;
+  box-shadow: 0 0 10px #34D399, 0 0 4px #10B981;
+  transform: scale(1.3);
+}
+
+.item-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+}
+
+.index-card-footer {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.index-quick-calc-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  background: linear-gradient(135deg, var(--primary-light), var(--primary-dark));
+  color: #FFFFFF;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.index-quick-calc-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(5, 150, 105, 0.4);
+}
+
+/* Mobile Responsive Optimization */
+@media (max-width: 768px) {
+  .floating-index-nav {
+    top: auto;
+    bottom: 84px;
+    right: 14px;
+    transform: none;
+    z-index: 1350;
+  }
+
+  .index-pill-btn {
+    padding: 6px 12px;
+    gap: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  }
+
+  .index-pill-label {
+    max-width: 95px;
+    font-size: 0.74rem;
+  }
+
+  .index-pill-counter {
+    font-size: 0.85rem;
+  }
+
+  .index-pill-counter .current-num {
+    font-size: 0.95rem;
+  }
+
+  /* Bottom sheet popup on mobile when clicked */
+  .index-card-menu {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    max-height: 75vh;
+    border-radius: 24px 24px 0 0;
+    transform: translateY(100%);
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.6);
+    z-index: 1360;
+  }
+
+  .floating-index-nav.expanded .index-card-menu {
+    transform: translateY(0);
+  }
+
+  .floating-index-nav:hover .index-card-menu {
+    /* Disable hover open on touch devices, rely on tap */
+    transform: translateY(100%);
+  }
+
+  .floating-index-nav.expanded:hover .index-card-menu {
+    transform: translateY(0);
+  }
+
+  .index-card-close {
+    display: block;
+  }
+}
+

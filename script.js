@@ -464,4 +464,141 @@ Coach Ritu, I would love your personal 1-on-1 guidance on my nutrition and metab
     });
   });
 
+  /* --------------------------------------------------------------------------
+     14. Floating Section Index Navigator (Auto-Switching Scroll Spy)
+     -------------------------------------------------------------------------- */
+  const floatingIndexNav = document.getElementById('floatingIndexNav');
+  const indexPillBtn = document.getElementById('indexPillBtn');
+  const indexCardClose = document.getElementById('indexCardClose');
+  const currentIndexNum = document.getElementById('currentIndexNum');
+  const currentIndexLabel = document.getElementById('currentIndexLabel');
+  const indexCardCounter = document.getElementById('indexCardCounter');
+  const indexProgressBar = document.getElementById('indexProgressBar');
+  const indexProgressFill = document.getElementById('indexProgressFill');
+  const indexNavItems = document.querySelectorAll('.index-nav-item');
+
+  if (floatingIndexNav && indexNavItems.length > 0) {
+    const sectionData = Array.from(indexNavItems).map(item => {
+      const targetId = item.getAttribute('data-target');
+      const element = document.getElementById(targetId);
+      const index = item.getAttribute('data-index');
+      const label = item.getAttribute('data-label') || targetId;
+      return { item, targetId, element, index, label };
+    }).filter(s => s.element !== null);
+
+    const totalSections = sectionData.length;
+    let activeIndex = -1;
+    let isTicking = false;
+
+    // Toggle expanded card menu
+    if (indexPillBtn) {
+      indexPillBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        floatingIndexNav.classList.toggle('expanded');
+        const isExp = floatingIndexNav.classList.contains('expanded');
+        indexPillBtn.setAttribute('aria-expanded', isExp ? 'true' : 'false');
+      });
+    }
+
+    if (indexCardClose) {
+      indexCardClose.addEventListener('click', (e) => {
+        e.stopPropagation();
+        floatingIndexNav.classList.remove('expanded');
+        if (indexPillBtn) indexPillBtn.setAttribute('aria-expanded', 'false');
+      });
+    }
+
+    // Close when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!floatingIndexNav.contains(e.target)) {
+        floatingIndexNav.classList.remove('expanded');
+        if (indexPillBtn) indexPillBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    // Smooth scroll on item click
+    indexNavItems.forEach(item => {
+      const link = item.querySelector('.index-nav-link');
+      if (!link) return;
+      link.addEventListener('click', (e) => {
+        const targetId = item.getAttribute('data-target');
+        const targetEl = document.getElementById(targetId);
+        if (targetEl) {
+          e.preventDefault();
+          const headerOffset = 70;
+          const targetPosition = targetEl.getBoundingClientRect().top + window.pageYOffset - headerOffset;
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
+          floatingIndexNav.classList.remove('expanded');
+          if (indexPillBtn) indexPillBtn.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
+
+    // Scroll Spy updating engine
+    const updateScrollSpy = () => {
+      const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+      const viewportHeight = window.innerHeight;
+      const triggerPoint = scrollY + (viewportHeight * 0.38);
+
+      let currentSectionIdx = 0;
+
+      // Check bottom of page edge case
+      if ((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 60) {
+        currentSectionIdx = totalSections - 1;
+      } else {
+        for (let i = 0; i < totalSections; i++) {
+          const sec = sectionData[i];
+          const top = sec.element.offsetTop;
+          if (triggerPoint >= top) {
+            currentSectionIdx = i;
+          } else {
+            break;
+          }
+        }
+      }
+
+      if (currentSectionIdx !== activeIndex) {
+        activeIndex = currentSectionIdx;
+        const current = sectionData[activeIndex];
+        const displayIndex = current.index; // e.g. "01", "02"
+        const numericIndex = parseInt(displayIndex, 10);
+        const percent = Math.round((numericIndex / totalSections) * 100);
+
+        // Update counter & label
+        if (currentIndexNum) currentIndexNum.textContent = displayIndex;
+        if (currentIndexLabel) currentIndexLabel.textContent = current.label;
+        if (indexCardCounter) indexCardCounter.textContent = `Section ${displayIndex} of 0${totalSections}`;
+
+        // Update progress bar & SVG ring
+        if (indexProgressBar) indexProgressBar.style.width = `${percent}%`;
+        if (indexProgressFill) indexProgressFill.setAttribute('stroke-dasharray', `${percent}, 100`);
+
+        // Update active class on items
+        indexNavItems.forEach(item => {
+          if (item === current.item) {
+            item.classList.add('active');
+          } else {
+            item.classList.remove('active');
+          }
+        });
+      }
+
+      isTicking = false;
+    };
+
+    window.addEventListener('scroll', () => {
+      if (!isTicking) {
+        window.requestAnimationFrame(updateScrollSpy);
+        isTicking = true;
+      }
+    }, { passive: true });
+
+    // Initial call
+    updateScrollSpy();
+  }
+
 });
+
